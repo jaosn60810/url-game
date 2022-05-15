@@ -17,6 +17,8 @@ function renderString(str) {
 // }
 
 class ClickGame {
+  gameTime = 3;
+
   constructor() {
     this.isGameStart = false;
     this.countDownTimer = 0;
@@ -26,7 +28,7 @@ class ClickGame {
 
   startGame() {
     this.isGameStart = true;
-    this.countDownTimer = 3;
+    this.countDownTimer = this.gameTime;
     this.clickCount = 0;
     this.gameResult = '';
   }
@@ -77,6 +79,14 @@ function update() {
   }, updateTimeSecond * 1000);
 }
 update();
+
+const input = document.querySelector('input');
+const text = document.querySelector('#gameTime');
+
+input.addEventListener('blur', () => {
+  clickGame.gameTime = parseInt(input.value);
+  text.textContent = `遊戲時間 ${input.value} 秒`;
+});
 
 window.addEventListener('keydown', function (e) {
   clickGame.keyboardInput(e.key);
